@@ -1,9 +1,9 @@
 class bankAccount {
 public:
-   void virtual retrieveAccountInfo();
-   void virtual deposit(double : amount);
-   void virtual withdraw(double : amount); 
-   void virtual createMonthlyStatement();
+   virtual void retrieveAccountInfo();
+   virtual void deposit(double : amount);
+   virtual void withdraw(double : amount); 
+   virtual void createMonthlyStatement();
 
 private:
    string name;
@@ -11,22 +11,22 @@ private:
    double balance;
 };
 
-void virtual bankAccount::retrieveAccountInfo()
+virtual void bankAccount::retrieveAccountInfo()
 {
 
 }
 
-void virtual bankAccount::deposit(double : amount)
+virtual void bankAccount::deposit(double : amount)
 {
 
 }
 
-void virtual bankAccount::withdraw(double : amount)
+virtual void bankAccount::withdraw(double : amount)
 {
 
 }
 
-void virtual bankAccount::createMonthlyStatement()
+virtual void bankAccount::createMonthlyStatement()
 {
 
 }
@@ -35,7 +35,7 @@ void virtual bankAccount::createMonthlyStatement()
 
 class checkingAccount : bankAccount {
 public:
-   void virtual writeCheck();
+   virtual void writeCheck();
 };
 
 class savingsAccount : bankAccount {
