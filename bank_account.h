@@ -1,9 +1,9 @@
 class bankAccount {
 public:
-   virtual void retrieveAccountInfo();
-   virtual void deposit(double : amount);
-   virtual void withdraw(double : amount); 
-   virtual void createMonthlyStatement();
+   virtual void retrieveAccountInfo() const = 0;
+   virtual void deposit(double : amount) const = 0;
+   virtual void withdraw(double : amount) const = 0; 
+   virtual void createMonthlyStatement() const = 0;
 
 private:
    string name;
@@ -35,7 +35,7 @@ virtual void bankAccount::createMonthlyStatement()
 
 class checkingAccount : bankAccount {
 public:
-   virtual void writeCheck();
+   virtual void writeCheck() const = 0;
 };
 
 class savingsAccount : bankAccount {
