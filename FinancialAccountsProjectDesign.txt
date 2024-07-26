@@ -1,0 +1,160 @@
+Financial Accounts with Type Erasure
+
+The type erasure pattern is a technique used in C++ to achieve polymorphism without the need for inheritance hierarchies. This design allows different types to be treated uniformly through a common interface while hiding the specific type information from the user. This approach is particularly useful in cases where runtime polymorphism is required, but traditional inheritance-based polymorphism is either too restrictive or not feasible.
+
+Components of the Design:
+
+1. Account Base Class
+    - An abstract base class that defines the common interface for all account types. This class has pure virtual functions that must be overridden by any derived class.
+    class Account {
+    public:
+        virtual ~Account() = default;
+        virtual void getAccountInfo() const = 0;
+        virtual void performOperations() = 0;
+    };
+
+2. AccountImpl Derived Class
+    - A template class that implements the Account interface for any given account type. It stores an instance of the specific account type and forwards calls to the corresponding member functions.
+    template <typename T>
+    class AccountImpl : public Account {
+    public:
+        AccountImpl(T account);
+        void getAccountInfo() const override;
+        void performOperations() override;
+
+    private:
+        T account_;
+    };
+
+3. Concrete Account Classes
+    - These classes represent specific types of bank accounts (e.g., ServiceChargeChecking, NoServiceChargeChecking, HighInterestChecking, etc.). Each class implements the required functionality, such as depositing, withdrawing, applying interest, and displaying account information.
+    class ServiceChargeChecking { /* Implementation */ };
+    class NoServiceChargeChecking { /* Implementation */ };
+    class HighInterestChecking { /* Implementation */ };
+    class HighInterestSavings { /* Implementation */ };
+    class HighInterestSavingsWithMinBalance { /* Implementation */ };
+    class CertificateOfDeposit { /* Implementation */ };
+
+4. Main Program
+    - The main function demonstrates the use of the type erasure design. It creates a vector of std::unique_ptr<Account> to store various types of accounts. This allows different account types to be managed and operated on polymorphically without knowing their specific types.
+    int main() {
+        std::vector<std::unique_ptr<Account>> accounts;
+
+        accounts.push_back(std::make_unique<AccountImpl<ServiceChargeChecking>>(ServiceChargeChecking("Alice", 1, 350.0, 10.0, 5)));
+        accounts.push_back(std::make_unique<AccountImpl<NoServiceChargeChecking>>(NoServiceChargeChecking("Bob", 2, 1700.0, 2.0, 1000.0)));
+        accounts.push_back(std::make_unique<AccountImpl<HighInterestChecking>>(HighInterestChecking("Charlie", 3, 2600.0, 3.0, 2000.0)));
+        accounts.push_back(std::make_unique<AccountImpl<HighInterestSavings>>(HighInterestSavings("Dave", 4, 1300.0, 1.0)));
+        accounts.push_back(std::make_unique<AccountImpl<HighInterestSavingsWithMinBalance>>(HighInterestSavingsWithMinBalance("Eve", 5, 320
+
+
+
+
+
++--------------------------+
+|    Account               |
++--------------------------+
+| + getAccountInfo() const |
+| + performOperations()    |
++--------------------------+
+        |
+        |
+        |
++-----------------------------+
+|       AccountImpl<T>        |
++-----------------------------+
+| - T account_                |
+| + AccountImpl(T account)    |
+| + getAccountInfo() const    |
+| + performOperations()       |
++-----------------------------+
+        |
+        |
+        |
++-----------------------------+
+| ServiceChargeChecking       |
++-----------------------------+
+| - std::string name_         |
+| - int accountNumber_        |
+| - double balance_           |
+| - double serviceCharge_     |
+| - int checkLimit_           |
+| - int checksWritten_        |
+| + ServiceChargeChecking(...)|
+| + getAccountInfo() const    |
+| + performOperations()       |
++-----------------------------+
+        |
+        |
+        |
++-------------------------------+
+| NoServiceChargeChecking       |
++-------------------------------+
+| - std::string name_           |
+| - int accountNumber_          |
+| - double balance_             |
+| - double interestRate_        |
+| - double minBalance_          |
+| + NoServiceChargeChecking(...)|
+| + getAccountInfo() const      |
+| + performOperations()         |
++-------------------------------+
+        |
+        |
+        |
++-----------------------------+
+| HighInterestChecking        |
++-----------------------------+
+| - std::string name_         |
+| - int accountNumber_        |
+| - double balance_           |
+| - double interestRate_      |
+| - double minBalance_        |
+| + HighInterestChecking(...) |
+| + getAccountInfo() const    |
+| + performOperations()       |
++-----------------------------+
+        |
+        |
+        |
++-----------------------------+
+| HighInterestSavings         |
++-----------------------------+
+| - std::string name_         |
+| - int accountNumber_        |
+| - double balance_           |
+| - double interestRate_      |
+| + HighInterestSavings(...)  |
+| + getAccountInfo() const    |
+| + performOperations()       |
++-----------------------------+
+        |
+        |
+        |
++------------------------------------------+
+| HighInterestSavingsWithMinBalance        |
++------------------------------------------+
+| - std::string name_                      |
+| - int accountNumber_                     |
+| - double balance_                        |
+| - double interestRate_                   |
+| - double minBalance_                     |
+| + HighInterestSavingsWithMinBalance(...) |
+| + getAccountInfo() const                 |
+| + performOperations()                    |
++------------------------------------------+
+        |
+        |
+        |
++-----------------------------+
+| CertificateOfDeposit        |
++-----------------------------+
+| - std::string name_         |
+| - int accountNumber_        |
+| - double balance_           |
+| - int maturityMonths_       |
+| - int currentMonth_         |
+| - double interestRate_      |
+| + CertificateOfDeposit(...) |
+| + getAccountInfo() const    |
+| + performOperations()       |
++-----------------------------+
