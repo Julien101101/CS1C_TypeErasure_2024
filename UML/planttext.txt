@@ -1,0 +1,66 @@
+@startuml
+abstract class bankAccount {
+    - accountNumber: string
+    - name: string
+    - balance: double
+    + getAccountName(): string
+    + getAccountNumber(): string
+    + getBalance(): double
+    + deposit(amount: double): void
+    + withdraw(amount: double): void
+    + createMonthlyStatement(): void
+    # checkMinimumBalance(): bool
+}
+
+abstract class checkingAccount {
+    + writeCheck(amount: double): void
+}
+
+class serviceChargeChecking {
+    - monthlyServiceCharge: double
+    - maxChecks: int
+    - interestRate: double
+    + writeCheck(amount: double): void
+    # withdraw(amount: double): void
+}
+
+class noServiceChargeChecking {
+    - minBalance: double
+    - interestRate: double
+    + writeCheck(amount: double): void
+    # withdraw(amount: double): void
+}
+
+class highInterestChecking {
+    - higherMinBalance: double
+    - higherInterestRate: double
+    # checkMinimumBalance(): bool
+}
+
+class savingsAccount {
+    - interestRate: double
+    # deposit(amount: double): void
+}
+
+class highInterestSavings {
+    - minBalance: double
+    - interestRate: double
+    # checkMinimumBalance(): bool
+}
+
+class certificateOfDeposit {
+    - maturityMonths: int
+    - cdInterestRate: double
+    - currentMonth: int
+    # deposit(amount: double): void
+    # withdraw(amount: double): void
+}
+
+bankAccount <|-- checkingAccount
+checkingAccount <|-- serviceChargeChecking
+checkingAccount <|-- noServiceChargeChecking
+noServiceChargeChecking <|-- highInterestChecking
+bankAccount <|-- savingsAccount
+savingsAccount <|-- highInterestSavings
+bankAccount <|-- certificateOfDeposit
+@enduml
