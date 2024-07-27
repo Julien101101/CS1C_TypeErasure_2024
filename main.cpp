@@ -1,38 +1,61 @@
+// hw06 main.cpp
+// PROFESSOR DRB
 // JULIEN SAVARY
+
+
 #include "bank_account.hpp"
+#include <iostream>
+#include <string>
 
 int main() {
-    CheckingAccount checkingAccount;
-    checkingAccount.setName("John Doe");
-    checkingAccount.setAccountNumber("123456");
-    checkingAccount.setBalance(1000.0);
+    std::string name;
+    std::string accountNumber = "12912412"; // Fixed account number for simplicity
+    double initialBalance = 0.0;
 
-    checkingAccount.retrieveAccountInfo();
-    checkingAccount.deposit(200.0);
-    checkingAccount.withdraw(150.0);
-    checkingAccount.createMonthlyStatement();
-    checkingAccount.writeCheck();
+    // Create an account
+    std::cout << "Enter your name: ";
+    std::getline(std::cin, name);
+    BankAccount account(name, accountNumber, initialBalance);
 
-    SavingsAccount savingsAccount;
-    savingsAccount.setName("Jane Smith");
-    savingsAccount.setAccountNumber("789012");
-    savingsAccount.setBalance(2000.0);
+    std::cout << "Hi " << name << ", your account number will be #" << accountNumber << std::endl;
 
-    savingsAccount.retrieveAccountInfo();
-    savingsAccount.deposit(300.0);
-    savingsAccount.withdraw(100.0);
-    savingsAccount.createMonthlyStatement();
+    int choice;
+    do {
+        std::cout << "\nWhat would you like to do today?\n";
+        std::cout << "1. Withdraw\n";
+        std::cout << "2. Deposit\n";
+        std::cout << "3. Check Statement\n";
+        std::cout << "4. Exit\n";
+        std::cout << "Enter your choice (1-4): ";
+        std::cin >> choice;
 
-    CertificateOfDeposit cdAccount(12, 3.0, 1);
-    cdAccount.setName("Alice Johnson");
-    cdAccount.setAccountNumber("345678");
-    cdAccount.setBalance(5000.0);
+        double amount;
+        switch (choice) {
+            case 1:
+                std::cout << "Enter amount to withdraw: ";
+                std::cin >> amount;
+                account.withdraw(amount);
+                break;
 
-    cdAccount.retrieveAccountInfo();
-    cdAccount.deposit(500.0);
-    cdAccount.withdraw(100.0);  // Should print that withdrawals are not allowed
-    cdAccount.createMonthlyStatement();
+            case 2:
+                std::cout << "Enter amount to deposit: ";
+                std::cin >> amount;
+                account.deposit(amount);
+                break;
+
+            case 3:
+                account.createMonthlyStatement();
+                break;
+
+            case 4:
+                std::cout << "Exiting. Have a great day!" << std::endl;
+                break;
+
+            default:
+                std::cout << "Invalid choice! Please enter a number between 1 and 4." << std::endl;
+                break;
+        }
+    } while (choice != 4);
 
     return 0;
 }
-

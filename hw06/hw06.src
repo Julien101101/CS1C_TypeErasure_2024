@@ -1,0 +1,72 @@
+Script started on Fri Jul 26 21:58:58 2024
+[1m[7m%[27m[1m[0m                                                                                ]7;file://juliens-mbp.lan/Users/juju/Desktop/s/cs1csummer2024/hw/06[0m[27m[24m[Jjuju@juliens-mbp 06 % [K[?2004hggit log[?2004l
+[?1h=[33mcommit 81f63db763a2ee76cb71d6646e0b1f9fb232962d[m[33m ([m[1;36mHEAD -> [m[1;32mJulien[m[33m, [m[1;31morigin/Julien[m[33m)[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Fri Jul 26 21:58:36 2024 -0700[m
+[m
+    finished structure[m
+[m
+[33mcommit 4eb51bb8aeb67b808df124dc4ad92fe4840c979f[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Thu Jul 18 14:04:35 2024 -0700[m
+[m
+    created a bank_account.h with basic structure of the bank account implementa[m tions missing the level 3 accounts[m
+[m
+[33mcommit d40c3074c89da5ea4f4a98f682d559ce326c59f0[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Wed Jul 17 17:16:09 2024 -0700[m
+[m
+    added a CMakeLists.txt[m
+[m
+[33mcommit 5ed490932cdf78730cfab23d68c8743740217810[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Wed Jul 17 16:37:45 2024 -0700[m
+[m
+:[K[K    added README.md[m
+:[K[K[K[7m(END)[27m[K[K[K[7m(END)[27m[K[K[K[7m(END)[27m[K[K[K[7m(END)[27m[K[K[K[7m(END)[27m[K[K[K[7m(END)[27m[K[K[K[7m(END)[27m[K[H[2J[HAuthor: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Fri Jul 26 21:58:36 2024 -0700[m
+[m
+    finished structure[m
+[m
+[33mcommit 4eb51bb8aeb67b808df124dc4ad92fe4840c979f[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Thu Jul 18 14:04:35 2024 -0700[m
+[m
+    created a bank_account.h with basic structure of the bank account implementa[m tions missing the level 3 accounts[m
+[m
+[33mcommit d40c3074c89da5ea4f4a98f682d559ce326c59f0[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Wed Jul 17 17:16:09 2024 -0700[m
+[m
+    added a CMakeLists.txt[m
+[m
+[33mcommit 5ed490932cdf78730cfab23d68c8743740217810[m[m
+Author: Julien Savary <juliensavary2001@gmail.com>[m
+Date:   Wed Jul 17 16:37:45 2024 -0700[m
+[m
+    added README.md[m
+[7m(END)[27m[K[K[?1l>
+[1m[7m%[27m[1m[0m                                                                                ]7;file://juliens-mbp.lan/Users/juju/Desktop/s/cs1csummer2024/hw/06[0m[27m[24m[Jjuju@juliens-mbp 06 % [K[?2004hggit  g  ggit g  ggig  lls[?2004l
+CMakeLists.txt		bank_program		out
+README.md		hw06.src
+bank_account.hpp	main.cpp
+[1m[7m%[27m[1m[0m                                                                                ]7;file://juliens-mbp.lan/Users/juju/Desktop/s/cs1csummer2024/hw/06[0m[27m[24m[Jjuju@juliens-mbp 06 % [K[?2004hlsgit lognpm run startbuild[13Dcd src       .. ls   cd ..srcnpm run buildstart[13Dgit log      ls       ggit  g  t rrm r  ../bank    .  cclang   c  [7mclang++ -std=c++17 -fsanitize=address -fsanitize=undefined[7m [7m-o bank_program main.cpp[27m[K
+[K[A[A[22C[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m-[27ms[27mt[27md[27m=[27mc[27m+[27m+[27m1[27m7[27m [27m-[27mf[27ms[27ma[27mn[27mi[27mt[27mi[27mz[27me[27m=[27ma[27md[27md[27mr[27me[27ms[27ms[27m [27m-[27mf[27ms[27ma[27mn[27mi[27mt[27mi[27mz[27me[27m=[27mu[27mn[27md[27me[27mf[27mi[27mn[27me[27md [27m-[27mo[27m [27mb[27ma[27mn[27mk[27m_[27mp[27mr[27mo[27mg[27mr[27ma[27mm[27m [27mm[27ma[27mi[27mn[27m.[27mc[27mp[27mp[1B[K[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://juliens-mbp.lan/Users/juju/Desktop/s/cs1csummer2024/hw/06[0m[27m[24m[Jjuju@juliens-mbp 06 % [K[?2004h. //./  ../p bank_a program[?2004l
+Checking Account Info: John Doe, 123456, Balance: 1000
+Monthly statement for Checking Account: 1050
+Writing a check from Checking Account
+Savings Account Info: Jane Smith, 789012, Balance: 2000
+Monthly statement for Savings Account: 2200
+CD Account Info: Alice Johnson, 345678, Balance: 5000, Maturity Months: 12, Interest Rate: 3%
+Withdrawals not allowed for CD Accounts
+Monthly statement for CD Account: 5500
+[1m[7m%[27m[1m[0m                                                                                ]7;file://juliens-mbp.lan/Users/juju/Desktop/s/cs1csummer2024/hw/06[0m[27m[24m[Jjuju@juliens-mbp 06 % [K[?2004h[?2004l
+
+Saving session...
+...copying shared history...
+...saving history...truncating history files...
+...completed.
+Deleting expired sessions...       6 completed.
+
+Script done on Fri Jul 26 22:00:13 2024

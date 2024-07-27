@@ -1,102 +1,81 @@
 #ifndef BANK_ACCOUNT_HPP
 #define BANK_ACCOUNT_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
 
 class BankAccount {
 public:
-    virtual void retrieveAccountInfo() const = 0;
-    virtual void deposit(double amount) = 0;
-    virtual void withdraw(double amount) = 0;
-    virtual void createMonthlyStatement() const = 0;
+    BankAccount(const std::string& name, const std::string& accountNumber, double initialBalance)
+        : name(name), accountNumber(accountNumber), balance(initialBalance) {}
 
-    // Getter methods
-    std::string getName() const { return name; }
-    std::string getAccountNumber() const { return accountNumber; }
-    double getBalance() const { return balance; }
-
-    // Setter methods
-    void setName(const std::string& name) { this->name = name; }
-    void setAccountNumber(const std::string& accountNumber) { this->accountNumber = accountNumber; }
-    void setBalance(double balance) { this->balance = balance; }
+    virtual void retrieveAccountInfo() const;
+    virtual void deposit(double amount);
+    virtual void withdraw(double amount);
+    virtual void createMonthlyStatement() const;
 
 protected:
     std::string name;
     std::string accountNumber;
-    double balance = 0.0;
+    double balance;
 };
 
+void BankAccount::retrieveAccountInfo() const {
+    std::cout << "Name: " << name << "\nAccount Number: " << accountNumber << "\nBalance: " << balance << std::endl;
+}
+
+void BankAccount::deposit(double amount) {
+    if (amount > 0) {
+        balance += amount;
+        std::cout << "Deposited: " << amount << std::endl;
+    } else {
+        std::cout << "Invalid deposit amount!" << std::endl;
+    }
+}
+
+void BankAccount::withdraw(double amount) {
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+        std::cout << "Withdrew: " << amount << std::endl;
+    } else {
+        std::cout << "Invalid withdrawal amount or insufficient funds!" << std::endl;
+    }
+}
+
+void BankAccount::createMonthlyStatement() const {
+    std::cout << "Monthly Statement:\n";
+    retrieveAccountInfo();
+}
+
+// Derived classes
 class CheckingAccount : public BankAccount {
 public:
-    void retrieveAccountInfo() const override {
-        std::cout << "Checking Account Info: " << name << ", " << accountNumber << ", Balance: " << balance << std::endl;
-    }
+    CheckingAccount(const std::string& name, const std::string& accountNumber, double initialBalance)
+        : BankAccount(name, accountNumber, initialBalance) {}
 
-    void deposit(double amount) override {
-        balance += amount;
-    }
-
-    void withdraw(double amount) override {
-        if (amount <= balance) {
-            balance -= amount;
-        } else {
-            std::cout << "Insufficient funds" << std::endl;
-        }
-    }
-
-    void createMonthlyStatement() const override {
-        std::cout << "Monthly statement for Checking Account: " << balance << std::endl;
-    }
-
-    void writeCheck() {
-        std::cout << "Writing a check from Checking Account" << std::endl;
+    void writeCheck(double amount) {
+        withdraw(amount);
+        std::cout << "Check written for: " << amount << std::endl;
     }
 };
 
 class SavingsAccount : public BankAccount {
 public:
-    void retrieveAccountInfo() const override {
-        std::cout << "Savings Account Info: " << name << ", " << accountNumber << ", Balance: " << balance << std::endl;
-    }
-
-    void deposit(double amount) override {
-        balance += amount;
-    }
-
-    void withdraw(double amount) override {
-        if (amount <= balance) {
-            balance -= amount;
-        } else {
-            std::cout << "Insufficient funds" << std::endl;
-        }
-    }
-
-    void createMonthlyStatement() const override {
-        std::cout << "Monthly statement for Savings Account: " << balance << std::endl;
-    }
+    SavingsAccount(const std::string& name, const std::string& accountNumber, double initialBalance)
+        : BankAccount(name, accountNumber, initialBalance) {}
 };
 
 class CertificateOfDeposit : public BankAccount {
 public:
-    CertificateOfDeposit(int maturityMonths, double interestRate, int currentMonth)
-        : maturityMonths(maturityMonths), interestRate(interestRate), currentMonth(currentMonth) {}
-
-    void retrieveAccountInfo() const override {
-        std::cout << "CD Account Info: " << name << ", " << accountNumber << ", Balance: " << balance
-                  << ", Maturity Months: " << maturityMonths << ", Interest Rate: " << interestRate << "%" << std::endl;
-    }
-
-    void deposit(double amount) override {
-        balance += amount;
-    }
-
-    void withdraw(double amount) override {
-        std::cout << "Withdrawals not allowed for CD Accounts" << std::endl;
-    }
+    CertificateOfDeposit(const std::string& name, const std::string& accountNumber, double initialBalance,
+                         int maturityMonths, double interestRate)
+        : BankAccount(name, accountNumber, initialBalance), maturityMonths(maturityMonths),
+          interestRate(interestRate), currentMonth(0) {}
 
     void createMonthlyStatement() const override {
-        std::cout << "Monthly statement for CD Account: " << balance << std::endl;
+        std::cout << "Certificate of Deposit Statement:\n";
+        retrieveAccountInfo();
+        std::cout << "Maturity Months: " << maturityMonths << "\nInterest Rate: " << interestRate << "%" << std::endl;
     }
 
 private:
