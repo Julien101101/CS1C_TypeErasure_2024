@@ -1,0 +1,3 @@
+/home/adam/CLionProjects/TypeReasure4/cmake-build-debug/CMakeFiles/TypeReasure4.dir
+/home/adam/CLionProjects/TypeReasure4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/adam/CLionProjects/TypeReasure4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
